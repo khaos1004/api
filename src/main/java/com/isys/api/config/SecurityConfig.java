@@ -1,5 +1,7 @@
 package com.isys.api.config;
 
+import com.isys.api.common.login.filter.JwtAuthenticationFilter;
+import com.isys.api.common.login.provider.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +24,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    //AuthenticationManager가 인자로 받을 AuthenticationConfiguraion 객체 생성자 주입
-    private final AuthenticationConfiguration authenticationConfiguration;
-
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
@@ -70,9 +70,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/login", "/api/join").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated())
-                //.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-//                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class)
-                //세션 설정
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
