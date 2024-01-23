@@ -1,8 +1,5 @@
 package com.isys.api;
 
-import com.isys.api.entity.QUserInfo;
-import com.querydsl.jpa.impl.JPAQuery;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
