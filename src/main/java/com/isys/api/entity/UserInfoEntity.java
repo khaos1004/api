@@ -14,7 +14,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @Getter
 @Table(name = "user_info")
-public class UserInfoEntity implements UserDetails {
+public class UserInfoEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class UserInfoEntity implements UserDetails {
     private int officeNum;
 
     @Column(name = "PASSWORD")
-    private String passWord;
+    private String password;
 
     @Column(name = "NAME")
     private String name;
@@ -40,38 +40,4 @@ public class UserInfoEntity implements UserDetails {
     @Column(name = "WORKCLASSTYPE_FK", columnDefinition = "DECIMAL")
     private int workClassTypeFk;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 }
