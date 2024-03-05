@@ -4,10 +4,11 @@ import com.isys.api.entity.UserInfoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfoEntity, Integer> {
-    Boolean existsByName(String username);
+    Boolean existsByName(String name);
 
-    //username을 받아 DB 테이블에서 회원을 조회하는 메소드 작성
-    UserInfoEntity findByName(String username);
+    Optional<UserInfoEntity> findByName(String name);
 }

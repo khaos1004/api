@@ -1,19 +1,18 @@
-package com.isys.api.common.login.service;
+package com.isys.api.common.login.dto;
 
 import com.isys.api.entity.UserInfoEntity;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Service
-@RequiredArgsConstructor
-public class CustomUserDetails implements UserDetails {
-
+public class CustomUserDetails  implements UserDetails {
     private final UserInfoEntity userInfoEntity;
+
+    public CustomUserDetails(UserInfoEntity userInfoEntity) {
+        this.userInfoEntity = userInfoEntity;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -23,7 +22,7 @@ public class CustomUserDetails implements UserDetails {
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-//                return userInfoEntity.getRole();
+                //return userGroupEntity.getRole();
                 return "";
             }
         });
